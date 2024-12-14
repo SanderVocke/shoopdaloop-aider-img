@@ -1,4 +1,5 @@
-FROM sandervocke/shoopdaloop_build_base_debian_bullseye_x86_64:latest
+ARG BASE_IMAGE=sandervocke/shoopdaloop_build_base_debian_bullseye_x86_64:latest
+FROM ${BASE_IMAGE}
 
 # Set the working directory
 WORKDIR /app
