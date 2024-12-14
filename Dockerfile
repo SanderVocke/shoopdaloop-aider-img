@@ -7,11 +7,9 @@ WORKDIR /app
 RUN python3 -m venv /app/aider-chat && \
     /app/aider-chat/bin/pip install aider-chat aider-chat[browser]
 
-# Clone the shoopdaloop repository
-RUN git clone https://github.com/SanderVocke/shoopdaloop.git /app/shoopdaloop
+# Copy the entrypoint script into the container
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 
-# Set the working directory to the cloned repository
-WORKDIR /app/shoopdaloop
-
-# Set the entry point to activate the virtual environment and run aider
-ENTRYPOINT ["/bin/bash", "-c", "source /app/aider-chat/bin/activate && aider --browser"]
+# Set the entry point to the new script
+ENTRYPOINT ["/app/entrypoint.sh"]
